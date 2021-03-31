@@ -3,7 +3,7 @@
 # MicroPrivateElement
 
 A micro-frontend(**mife**...like "wife":) bootstrap that authenticates mife users against Firebase and provides access to a configured mife [realm](https://github.com/Micro-cosm/micro-realm).
-This project is similar to [micro-private-element](https://github.com/Micro-cosm/micro-private-element), but differs by its use of several web components that were deployed from
+This project is similar to [micro-private](https://github.com/Micro-cosm/micro-private), but differs by its use of several web components that were deployed from
 [micro-client-library](https://github.com/Micro-cosm/micro-client-library).
 
 With the use of [micro-cms](https://github.com/Micro-cosm/micro-cms), dynamic content to any GraphQL datasource is supported.
