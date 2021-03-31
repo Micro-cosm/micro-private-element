@@ -39,3 +39,8 @@ A few goals of the overarching project:
 
 This project was initially generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.7.
 
+---
+## TODOs
+
+- Replace CMS component with Angular Element
+- Replace Angular code environment files with static remote environment stored in environment-specific GCP bucket or GCP Secret Manager, as appropriate. 
