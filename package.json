@@ -2,15 +2,15 @@
     "name": "micro-private-element",
     "version": "0.0.1",
     "scripts": {
-        "build:ngssc:prod":     "ng run micro-private-element:ngsscbuild:production",
-        "build:ngssc:stage":    "ng run micro-private-element:ngsscbuild:stage",
-        "build:ngssc:local":    "ng run micro-private-element:ngsscbuild:local",
-        "build:ngssc":          "ng run micro-private-element:ngsscbuild:production",
-        "start":                "ng serve --port=4421",
-        "build":                "ng build",
-        "test":                 "ng test",
-        "lint:fix":             "ng lint --fix",
-        "e2e":                  "ng e2e"
+        "build:ngssc:prod": "ng run micro-private-element:ngsscbuild:production",
+        "build:ngssc:stage": "ng run micro-private-element:ngsscbuild:stage",
+        "build:ngssc:local": "ng run micro-private-element:ngsscbuild:local",
+        "build:ngssc": "ng run micro-private-element:ngsscbuild:production",
+        "start": "ng serve --port=4421",
+        "build": "ng build",
+        "test": "ng test",
+        "lint:fix": "ng lint --fix",
+        "e2e": "ng e2e"
     },
     "private": true,
     "dependencies": {
@@ -48,7 +48,6 @@
         "moment": "2.24.0",
         "ngx-auth-firebaseui": "^5.1.0",
         "rxjs": "~6.6.0",
-        "ts-node": "^9.1.1",
         "tslib": "^2.0.0",
         "web-animations-js": "^2.3.2",
         "zone.js": "~0.11.3"
@@ -62,12 +61,13 @@
         "@angular-eslint/template-parser": "2.0.2",
         "@angular/cli": "~11.2.5",
         "@angular/compiler-cli": "~11.2.6",
-        "@schematics/angular": "^11.2.2",
+        "@schematics/angular": "^11.2.6",
         "@types/jasmine": "~3.6.0",
         "@types/jasminewd2": "^2.0.8",
         "@types/jest": "^26.0.20",
         "@types/jquery": "^3.5.5",
         "@types/node": "^14.14.35",
+        "@types/zen-observable": "^0.8.2",
         "@typescript-eslint/eslint-plugin": "4.16.1",
         "@typescript-eslint/parser": "4.16.1",
         "eslint": "^7.22.0",
@@ -81,10 +81,11 @@
         "karma": "~6.1.0",
         "karma-chrome-launcher": "~3.1.0",
         "karma-coverage": "~2.0.3",
+        "karma-coverage-istanbul-reporter": "^3.0.3",
         "karma-jasmine": "~4.0.0",
         "karma-jasmine-html-reporter": "^1.5.0",
         "protractor": "~7.0.0",
-        "ts-node": "~8.3.0",
+        "ts-node": "^9.1.1",
         "typescript": "~4.1.5"
     }
 }

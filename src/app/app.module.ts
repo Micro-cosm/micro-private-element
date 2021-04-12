@@ -1,34 +1,42 @@
 
 // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// DEFAULT
-import { environment				} from '../environments/environment';												// EXTERNAL MODULES
+import { environment				} from '../environments/environment';
+
 import { BrowserAnimationsModule	} from '@angular/platform-browser/animations';
 import { BrowserModule				} from '@angular/platform-browser';
 import { CdkTableModule				} from '@angular/cdk/table';
 import { CdkTreeModule				} from '@angular/cdk/tree';
-import { CUSTOM_ELEMENTS_SCHEMA		} from '@angular/core';																// ELEMENT SUPPORT
+import { CUSTOM_ELEMENTS_SCHEMA		} from '@angular/core';
 import { FlexLayoutModule			} from '@angular/flex-layout';
 import { NgModule					} from '@angular/core';
 import { Title						} from '@angular/platform-browser';
-import { AppComponent				} from './app.component';															// COMPONENTS
+
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// MIFE COMMON
+import { AppComponent				} from './app.component';
 import { AppRoutingModule			} from './app-routing.module';
 import { HomeComponent				} from './home/home.component';
-// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// AVAILABLE(by function)
-import { MaterialModule				} from './sub-modules/material.module';												// MISC
-import { GraphQLModule				} from './sub-modules/graphql.module';												// AUTH
-import { HttpClientModule			} from '@angular/common/http';														// CONTENT
-import { ContentComponent			} from './content/content.component';												// CONTENT
-import { ContentFullComponent		} from './content-full/content-full.component';										// CONTENT
-import { NavPipe					} from './_pipes/nav.pipe';															// CONTENT
-import { SafePipe					} from './_pipes/safe.pipe';														// CONTENT
-import { CmsService					} from './_services/cms.service';													// CONTENT
-import { AngularFireModule			} from '@angular/fire';																// AUTH
-import { NgxAuthFirebaseUIModule	} from 'ngx-auth-firebaseui';														// AUTH
-import { LoggedOutComponent			} from './logged-out/logged-out.component';											// AUTH
-import { LoginComponent				} from './login/login.component';													// AUTH
 
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// MATERIAL SUPPORT
+import { MaterialModule				} from './sub-modules/material.module';
 import 'hammerjs';
 
-export function firebaseAppNameFactory() { return `weja-us`; }															// AUTH
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// AUTH
+import { AngularFireModule			} from '@angular/fire';
+import { NgxAuthFirebaseUIModule	} from 'ngx-auth-firebaseui';
+import { LoggedOutComponent			} from './logged-out/logged-out.component';
+import { LoginComponent				} from './login/login.component';
+import { GraphQLModule				} from './sub-modules/graphql.module';
+
+export function firebaseAppNameFactory() { return `weja-us`; }
+
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// CONTENT
+import { HttpClientModule			} from '@angular/common/http';
+import { ContentComponent			} from './content/content.component';
+import { ContentFullComponent		} from './content-full/content-full.component';
+import { NavPipe					} from './_pipes/nav.pipe';
+import { SafePipe					} from './_pipes/safe.pipe';
+import { CmsService					} from './_services/cms.service';
+
 
 @NgModule({
 	declarations: [
@@ -47,15 +55,15 @@ export function firebaseAppNameFactory() { return `weja-us`; }															// 
 		BrowserModule,
 		CdkTableModule,
 		CdkTreeModule,
-		MaterialModule,
 		FlexLayoutModule,
 		GraphQLModule,
 		HttpClientModule,
-		NgxAuthFirebaseUIModule.forRoot(environment.firebase.creds, firebaseAppNameFactory, environment.firebase.configs),
-		AngularFireModule.initializeApp(environment.firebase.creds),
+		MaterialModule,
+		AngularFireModule.initializeApp( environment.firebase.creds ),
+		NgxAuthFirebaseUIModule.forRoot( environment.firebase.creds, firebaseAppNameFactory, environment.firebase.configs ),
 	],
 	providers: [
-		{ provide: 'googleTagManagerId',	useValue: environment.google.analytics.trackingCode },
+		{ provide: 'googleTagManagerId', useValue: environment.google.analytics.trackingCode },
 		CmsService,
 		Title
 	],

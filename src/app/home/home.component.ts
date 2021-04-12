@@ -1,11 +1,10 @@
 
 
-import {	environment			} from '../../environments/environment';
-import {	ActivatedRoute		} from '@angular/router';
-import {	AngularFireAuth		} from '@angular/fire/auth';
-import {	Component			} from '@angular/core';
-import {	OnInit				} from '@angular/core';
-import {	Router				} from '@angular/router';
+import { environment		} from '../../environments/environment';
+import { AngularFireAuth	} from '@angular/fire/auth';
+import { Component			} from '@angular/core';
+import { OnInit				} from '@angular/core';
+import { Router				} from '@angular/router';
 
 @Component({
 	selector: 'app-home',
@@ -19,7 +18,6 @@ export class HomeComponent implements OnInit {
 	loggedIn	= false;
 	
 	constructor(
-		private route:		ActivatedRoute,
 		private fireAuth:	AngularFireAuth,
 		public	router:		Router
 	) {

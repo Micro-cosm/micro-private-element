@@ -6,7 +6,14 @@ services:
         build: .
         container_name: micro_${NICKNAME}_${TARGET_ALIAS}
         restart: unless-stopped
+        environment:
+            - TARGET_LOCAL_PORT
+            - TARGET_PROJECT_ID
+            - SERVICE_NAME
+            - TARGET_ALIAS
+            - TARGET_IMAGE_TAG
+            - NICKNAME
         env_file:
             - ".env.local.yml"
         ports:
-            - ${TARGET_LOCAL_PORT}:8080
+            - 4421:8080

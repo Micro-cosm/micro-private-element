@@ -6,7 +6,14 @@ A micro-frontend(**mife**...like "wife":) bootstrap that authenticates mife user
 This project is similar to [micro-private](https://github.com/Micro-cosm/micro-private), but differs by its use of several web components that were deployed from
 [micro-client-library](https://github.com/Micro-cosm/micro-client-library).
 
+
 With the use of [micro-cms](https://github.com/Micro-cosm/micro-cms), dynamic content to any GraphQL datasource is supported.
+
+<span style="color:red; ">
+    <strong>NOTE:</strong> The unit tests for this project are temporarily unplugged awaiting resolution of a 'zen-observable' issue, 
+    a dependency of @apollo/client as configured here.  So far, the issue is isolated to testing, Apollo seems to do a fine job with its primary function, pulling content.</span>
+
+[Here](https://github.com/apollographql/apollo-client/issues/5961) 's the issue along with a manual [hack-around](), if you are excited for the tests to run.
 
 # Quickstart
 To encourage rapid iteration/deployment, this project is configured for, and this quickstart assumes, use with [bin-zsh](https://github.com/wejafoo/bin-zsh).

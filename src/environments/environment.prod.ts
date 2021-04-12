@@ -4,7 +4,8 @@
 // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	EXPLICITLY-DEFINED ENVIRONMENT
 const	TARGET_ALIAS		= process.env.TARGET_ALIAS			|| 'stage';
 const	THIS_NICKNAME		= process.env.NICKNAME				|| 'private-element';
-const	THIS_TITLE			= process.env.THIS_TITLE			|| 'WèJá Töö ' + THIS_NICKNAME + '(' + TARGET_ALIAS + ')';
+const	THIS_SITE_NICKNAME	= process.env.THIS_SITE_NICKNAME	|| 'WEJATOO'
+const	THIS_TITLE			= process.env.THIS_TITLE			|| THIS_SITE_NICKNAME + ' ' + THIS_NICKNAME + '(' + TARGET_ALIAS + ')';
 const	TARGET_PROJECT_ID	= process.env.TARGET_PROJECT_ID		|| 'weja-us';
 const	TARGET_DOMAIN		= process.env.TARGET_DOMAIN			|| 'weja.us';
 const	TARGET_REALM		= process.env.TARGET_REALM			|| 'too.fb.';
@@ -16,19 +17,19 @@ const	CMS_SHEET 			= process.env.CMS_SHEET 			||
 
 //  LESS FREQUENT -- MIFE ADDS/UPDATES
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////	GLOBAL CONSTANTS
-	const LOCAL_PROTOCOL 			= process.env.LOCAL_PROTOCOL			|| 'http://';
-	const REMOTE_PROTOCOL			= process.env.REMOTE_PROTOCOL			|| 'https://';
-	const THIS_PROTOCOL				= process.env.THIS_PROTOCOL				|| REMOTE_PROTOCOL;
-	const STAGE_REMOTE_REALM_BASE	= process.env.STAGE_REMOTE_REALM_BASE	|| REMOTE_PROTOCOL + 'too.fb.' + TARGET_DOMAIN;
-	const PROD_REMOTE_REALM_BASE	= process.env.PROD_REMOTE_REALM_BASE	|| REMOTE_PROTOCOL + 'foo.fb.' + TARGET_DOMAIN;
+	// const LOCAL_PROTOCOL 			= process.env.LOCAL_PROTOCOL			|| 'http://';
+	const REMOTE_PROTOCOL				= process.env.REMOTE_PROTOCOL			|| 'https://';
+	// const THIS_PROTOCOL				= process.env.THIS_PROTOCOL				|| REMOTE_PROTOCOL;
+	// const STAGE_REMOTE_REALM_BASE	= process.env.STAGE_REMOTE_REALM_BASE	|| REMOTE_PROTOCOL + 'too.fb.' + TARGET_DOMAIN;
+	const PROD_REMOTE_REALM_BASE		= process.env.PROD_REMOTE_REALM_BASE	|| REMOTE_PROTOCOL + 'foo.fb.' + TARGET_DOMAIN;
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////	LOCALLY REGISTERED SERVICES
-	const LOCAL_REALM_BASE 			= process.env.LOCAL_REALM_BASE			|| LOCAL_PROTOCOL	+ 'localhost:';
-	const AUTH_LOCAL_SERVICE		= process.env.AUTH_LOCAL_SERVICE		|| LOCAL_REALM_BASE	+ '4420/auth-element/#/';
-	const CHAT_LOCAL_SERVICE		= process.env.CHAT_LOCAL_SERVICE		|| LOCAL_REALM_BASE	+ '4415/chat/#/';
-	const CMS_LOCAL_SERVICE			= process.env.CMS_LOCAL_SERVICE			|| LOCAL_REALM_BASE	+ '4411/cms/#/';
-	const FORM_LOCAL_SERVICE		= process.env.FORM_LOCAL_SERVICE		|| LOCAL_REALM_BASE	+ '4423/form-element/#/';
-	const PRIVATE_LOCAL_SERVICE		= process.env.PRIVATE_LOCAL_SERVICE		|| LOCAL_REALM_BASE	+ '4421/private-element/#/';
-	const PUBLIC_LOCAL_SERVICE		= process.env.PUBLIC_LOCAL_SERVICE		|| LOCAL_REALM_BASE	+ '4402/public/#/';
+	// const LOCAL_REALM_BASE 			= process.env.LOCAL_REALM_BASE			|| LOCAL_PROTOCOL	+ 'localhost:';
+	// const AUTH_LOCAL_SERVICE			= process.env.AUTH_LOCAL_SERVICE		|| LOCAL_REALM_BASE	+ '4420/auth-element/#/';
+	// const CHAT_LOCAL_SERVICE			= process.env.CHAT_LOCAL_SERVICE		|| LOCAL_REALM_BASE	+ '4415/chat/#/';
+	// const CMS_LOCAL_SERVICE			= process.env.CMS_LOCAL_SERVICE			|| LOCAL_REALM_BASE	+ '4411/cms/#/';
+	// const FORM_LOCAL_SERVICE			= process.env.FORM_LOCAL_SERVICE		|| LOCAL_REALM_BASE	+ '4423/form-element/#/';
+	// const PRIVATE_LOCAL_SERVICE		= process.env.PRIVATE_LOCAL_SERVICE		|| LOCAL_REALM_BASE	+ '4421/private-element/#/';
+	// const PUBLIC_LOCAL_SERVICE		= process.env.PUBLIC_LOCAL_SERVICE		|| LOCAL_REALM_BASE	+ '4402/public/#/';
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////	REMOTELY REGISTERED SERVICES
 	const TARGET_REMOTE_REALM		= process.env.TARGET_REMOTE_REALM		|| TARGET_REALM		+ TARGET_DOMAIN;
 	const TARGET_REMOTE_REALM_BASE	= process.env.REMOTE_REALM_BASE			|| REMOTE_PROTOCOL	+ TARGET_REMOTE_REALM;
@@ -53,19 +54,26 @@ const	CMS_SHEET 			= process.env.CMS_SHEET 			||
 	
 //  MORE FREQUENT --  CUSTOM DEVELOPMENT/INTEGRATION
 // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	THIS MIFE
-const THIS_SERVICE		= process.env.PRIVATE_SERVICE	|| PRIVATE_REMOTE_SERVICE;
+const THIS_SERVICE					= process.env.PRIVATE_SERVICE			|| PRIVATE_REMOTE_SERVICE;
 // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	OTHER MIFEN
-const AUTH_SERVICE		= process.env.AUTH_SERVICE		|| AUTH_REMOTE_SERVICE;
-const CMS_SERVICE		= process.env.CMS_SERVICE		|| CMS_REMOTE_SERVICE;
-const CHAT_SERVICE		= process.env.CHAT_SERVICE		|| CHAT_REMOTE_SERVICE;
-const FORM_SERVICE		= process.env.FORM_SERVICE		|| FORM_REMOTE_SERVICE;
-const PRIVATE_SERVICE	= process.env.PRIVATE_SERVICE	|| THIS_SERVICE;
-const PUBLIC_SERVICE	= process.env.PUBLIC_SERVICE	|| PUBLIC_REMOTE_SERVICE;
+const AUTH_SERVICE					= process.env.AUTH_SERVICE				|| AUTH_REMOTE_SERVICE;
+const CMS_SERVICE					= process.env.CMS_SERVICE				|| CMS_REMOTE_SERVICE;
+const CHAT_SERVICE					= process.env.CHAT_SERVICE				|| CHAT_REMOTE_SERVICE;
+const FORM_SERVICE					= process.env.FORM_SERVICE				|| FORM_REMOTE_SERVICE;
+const PRIVATE_SERVICE				= process.env.PRIVATE_SERVICE			|| THIS_SERVICE;
+const PUBLIC_SERVICE				= process.env.PUBLIC_SERVICE			|| PUBLIC_REMOTE_SERVICE;
 
 
 export const environment = {
 	production:	Boolean( TARGET_ALIAS	=== 'prod' ),
-	this:		{ nickname: THIS_NICKNAME,	service: THIS_SERVICE, title: THIS_TITLE },
+	this: {
+		local:			false,
+		remote:			true,
+		nickname:		THIS_NICKNAME,
+		service:		THIS_SERVICE,
+		site_Nickname:	THIS_SITE_NICKNAME,
+		title:			THIS_TITLE
+	},
 	target:		{ alias:	TARGET_ALIAS,	domain: TARGET_DOMAIN, realm: TARGET_REALM, remote: TARGET_REMOTE_REALM },
 	realm:		{ base:		TARGET_REMOTE_REALM_BASE },
 	assets:		{ bucket:	ASSETS_BUCKET },
@@ -75,8 +83,8 @@ export const environment = {
 	form:		{ service:	FORM_SERVICE		},
 	private:	{ service:	PRIVATE_SERVICE		},
 	public:		{ service:	PUBLIC_SERVICE		},
-	authGuardRemoteFallbackURL:	AUTH_SERVICE	+ 'login',
-	authGuardRemoteLoggedInURL:	PRIVATE_SERVICE	+ 'home',
+	authGuardRemoteFallbackURL:	THIS_SERVICE + 'login',
+	authGuardRemoteLoggedInURL:	THIS_SERVICE + 'home',
 	firebase: {
 		creds: {
 			appId:				FB_CREDS_APP_ID,

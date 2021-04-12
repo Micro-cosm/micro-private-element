@@ -57,12 +57,15 @@ export class LoginComponent implements OnInit {
 		console.log( '>>LoginComponent -> onSuccess -> event:', event );
 		this.error	= false;
 		this.index	= 2;
-		if ( this.returnService === 'private-element' ) {
-			console.log( '>>>>>>>>>>>>>>>>>>>>>>>>> Returning:', this.returnService, '<<<<<<<<<<<<<<<<<<<<<<<<<' );
-			window.location.replace( this.env.this.service );
-		} else {
-			window.location.replace( this.env.authGuardRemoteLoggedInURL );
-		}
+		window.location.replace( this.env.authGuardRemoteLoggedInURL );
+		/*
+			if ( this.returnService === 'private-element' ) {
+				console.log( '>>>>>>>>>>>>>>>>>>>>>>>>> Returning:', this.returnService, '<<<<<<<<<<<<<<<<<<<<<<<<<' );
+				window.location.replace( this.env.this.service )
+			} else {
+				window.location.replace( this.env.authGuardRemoteLoggedInURL )
+			}
+		*/
 	}
 	
 	onError( event ) {

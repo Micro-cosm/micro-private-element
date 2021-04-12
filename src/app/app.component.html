@@ -1,6 +1,9 @@
 
 
 <weja-element-dev-head [hostEnv]="env"></weja-element-dev-head>
-<weja-element-nav [title]="title"></weja-element-nav>
-<router-outlet></router-outlet>
+<weja-element-nav [hostEnv]="env" [title]="title"></weja-element-nav>
+
+<div>
+	<router-outlet></router-outlet>
+</div>
 
