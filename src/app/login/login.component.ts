@@ -16,18 +16,18 @@ import { Theme				} from 'ngx-auth-firebaseui';
 })
 
 export class LoginComponent implements OnInit {
-	env:		any;
-	controls:	any;
-	email:		string;
-	error:		boolean;
-	index:		number;
-	login:		false;
-	password:	string;
-	text:		string;
-	title:		string;
-	tosUrl:		string;
-	min:		number;
-	returnService: string;
+	env:			any;
+	returnService:	string;
+	controls:		any;
+	email:			string;
+	error:			boolean;
+	index:			number;
+	login:			false;
+	password:		string;
+	text:			string;
+	title:			string;
+	tosUrl:			string;
+	min:			number;
 	sendNewVerificationEmailText: string;
 	verifyEmailGoBackText: string;
 	
@@ -40,41 +40,46 @@ export class LoginComponent implements OnInit {
 	emailText				= 'E-mail';
 	emailErrorPatternText	= 'Please enter a valid e-mail address';
 	registerButtonText		= 'Register';
-	emailConfirmationText =
+	emailConfirmationText	=
 		`A confirmation e-mail has been sent to you. Check your inbox and click on the link "Confirm my e-mail" to confirm your e-mail address.`;
 	
 	constructor(
 		private	route:		ActivatedRoute,
 		public	fireAuth:	AngularFireAuth,
 		public	router:		Router
-	) {
-		this.env = environment;
-	}
+	) { this.env = environment }
 	
-	ngOnInit() { this.returnService = this.route.snapshot.params.returnService; }
+	ngOnInit() { this.returnService = this.route.snapshot.params.returnService }
 
 	onSuccess( event ) {
-		console.log( '>>LoginComponent -> onSuccess -> event:', event );
+		if ( this.env.debug ) console.log( '>>LoginComponent -> onSuccess -> event:', event );
+		
 		this.error	= false;
 		this.index	= 2;
-		window.location.replace( this.env.authGuardRemoteLoggedInURL );
-		/*
-			if ( this.returnService === 'private-element' ) {
-				console.log( '>>>>>>>>>>>>>>>>>>>>>>>>> Returning:', this.returnService, '<<<<<<<<<<<<<<<<<<<<<<<<<' );
-				window.location.replace( this.env.this.service )
+		
+		if ( this.returnService != null ) {
+			console.log( '!!!!!!!!!!!!!!!!!! HEY! the return service is NOT null, its:', this.returnService, '<<<<<<<<<<<<<<<<<<<<<<<<<' );
+			if ( this.returnService === 'private' ) {
+				this.router.navigate(["/home"]).then()
 			} else {
+				window.location.replace("/" + this.returnService )
+			}
+		} else {
+			if ( this.env.local ) {
+				this.router.navigate(["/home"]).then()
+			} else {
+				console.log( '>>>>>>>>>>>>>>>>>>>>>>>>> Returning to whence:', this.returnService, '<<<<<<<<<<<<<<<<<<<<<<<<<' );
 				window.location.replace( this.env.authGuardRemoteLoggedInURL )
 			}
-		*/
+		}
 	}
 	
 	onError( event ) {
-		console.error( 'onError event --> ', event );
-		console.log( '>>LoginComponent -> onError -> event:', event );
+		if ( this.env.debug ) console.log( '>>LoginComponent -> onError -> event:', event );
 		this.error = true;
 	}
 	
-	logout():		void { this.fireAuth.signOut().then( r => console.log( '>> LoginComponent -> signOut:', r ));}
-	onSignOut():	void { console.log( 'Sign-out successful!' );}
+	logout(): void { this.fireAuth.signOut().then( r => console.log( '>> LoginComponent -> signOut:', r ))}
+	onSignOut(): void { console.log( 'Sign-out successful!' )}
 }
 

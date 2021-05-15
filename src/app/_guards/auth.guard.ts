@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate {
 		private authProcess:	AuthProcessService
 	) {
 		console.log( '>> AuthGuard -> constructing -> config:', config );
-		this.env = environment;
+		this.env = environment
 	}
 	
 	canActivate(
@@ -35,11 +35,8 @@ export class AuthGuard implements CanActivate {
 		if ( this.env.debug ) console.log( '>> AuthGuard -> canActivate -> router state:', state );
 
 		return this.authProcess.afa.user.pipe( map( user => {
-			if (this.env.debug) console.log( '>> AuthGuard -> canActivate -> user:',	user					);
-			if (this.env.debug) console.log( '>> AuthGuard -> canActivate -> config:',	this.config				);
-			if (this.env.debug) console.log( '>> AuthGuard -> canActivate -> local?',	this.env.this.local		);
-			if (this.env.debug) console.log( '>> AuthGuard -> canActivate -> remote?',	this.env.this.remote	);
-			
+			console.log( '>> AuthGuard -> canActivate -> user:', user );
+			console.log( '>> AuthGuard -> canActivate -> config:', this.config );
 			if ( user ) {
 				if (
 					this.env.remote											&&
@@ -53,9 +50,15 @@ export class AuthGuard implements CanActivate {
 				}
 				return true
 			} else {
-				console.log( '>>> AuthGuard -> canActivate?   NoSoFoYoo' );
-				console.log( '>>> AuthGuard -> ACCESS DENIED -> Redirecting to remote fallback URL:', this.env.authGuardRemoteFallbackURL );
-				window.location.href = this.env.authGuardRemoteFallbackURL;
+				if ( this.env.local ) {
+					console.log('>>> AuthGuard -> canActivate?   NoSoFoYo');
+					console.log('>>> AuthGuard -> ACCESS DENIED -> Redirecting to remote fallback URL:', this.env.authGuardRemoteFallbackURL);
+					this.router.navigate(["/login"]).then()
+				} else {
+					console.log('>>> AuthGuard -> canActivate?   NoSoFoYo');
+					console.log('>>> AuthGuard -> ACCESS DENIED -> Redirecting to remote fallback URL:', this.env.authGuardRemoteFallbackURL);
+					window.location.href = this.env.authGuardRemoteFallbackURL;
+				}
 			}
 		}))
 	}

@@ -19,13 +19,11 @@ export class AppComponent {
 	constructor(
 		public	auth:			AngularFireAuth,
 		public	router:			Router,
-		public	titleService:	Title
+		private titleService:	Title
 	) {
-		this.env	= environment;
-		this.title	= this.env.this.title;
-		this.setTitle( this.title );
-		console.log( '>>> AppComponent -> Environment:', this.env );
+		this.env = environment;
+		console.log( 'Environment:', this.env );
+		this.title = this.env.title
+		this.titleService.setTitle( this.title )
 	}
-	
-	public setTitle( newTitle: string ) { this.titleService.setTitle( newTitle )}
 }

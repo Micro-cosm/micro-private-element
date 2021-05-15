@@ -2,31 +2,31 @@
 
 // V7
 import { fb		} from "./fb.stage";
-import { local	} from "./local";
+// import { local	} from "./local";
 import { remote	} from "./remote";
 
 // When configuring new mifen,
 // 			   ---- change this... ----   ...and this...
 //  		 /							/
 //  		V						   V
-const PRIVATE_MIFE	= process.env.PRIVATE_MIFE	|| local.REALM_BASE + local.ROUTE_BASE + '#/';
+const PRIVATE_MIFE	= process.env.PRIVATE_MIFE	|| remote.REALM_BASE + remote.ROUTE_BASE + '#/';
 // 			   			  ------ ...and lastly, this.
 //						/
 //					   V
 const THIS_MIFE	= PRIVATE_MIFE;
 
 export const environment = {
-	production: Boolean(local.ALIAS === 'prod'),
-	debug:		Boolean(local.DEBUG === 'true'),
-	logs:		Boolean(local.LOGS === 'true'),
-	local:		true,
-	remote:		false,
-	title:		local.TITLE,
-	target: { alias: local.ALIAS },
-	assets: { bucket: local.ASSETS_BUCKET },
+	production: Boolean(remote.ALIAS === 'prod'),
+	debug:		Boolean(remote.DEBUG === 'true'),
+	logs:		Boolean(remote.LOGS === 'true'),
+	local:		false,
+	remote:		true,
+	title:		remote.TITLE,
+	target: { alias: remote.ALIAS },
+	assets: { bucket: remote.ASSETS_BUCKET },
 	mife: {
 		this:		THIS_MIFE,
-		auth:		THIS_MIFE,
+		auth:		remote.AUTH_MIFE,
 		register:	remote.AUTH_MIFE + 'register',
 		chat:		remote.CHAT_MIFE,
 		form:		remote.FORM_MIFE,
@@ -38,9 +38,9 @@ export const environment = {
 		cms:		remote.CMS_SERVICE
 	},
 	cms: {
-		service:	local.CMS_SERVICE,
-		sheet:		local.CMS_SHEET,
-		alias:		local.CMS_ALIAS
+		service:	remote.CMS_SERVICE,
+		sheet:		remote.CMS_SHEET,
+		alias:		remote.CMS_ALIAS
 	},
 	authGuardRemoteFallbackURL:	THIS_MIFE + '/login',
 	authGuardRemoteLoggedInURL:	THIS_MIFE + '/home',
@@ -73,4 +73,4 @@ export const environment = {
 	timeZone: 'America/Denver'
 };
 
-import 'zone.js/dist/zone-error';
+

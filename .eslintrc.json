@@ -18,11 +18,13 @@
             "ignoreUrls": true
         }],
         "new-cap": "off",
-        "no-trailing-spaces":  "off",
         "no-multiple-empty-lines": "off",
+        "no-multi-spaces": "off",
         "no-tabs": "off",
+        "no-trailing-spaces":  "off",
         "no-unused-vars": "off",
         "object-curly-spacing": "off",
+        "quotes": "off",
         "require-jsdoc": "off",
         "semi": "off"
     }

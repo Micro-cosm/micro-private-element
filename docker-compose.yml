@@ -1,19 +1,15 @@
-version: '3.7'
+
+
+version: '3.8'
 
 services:
-    micro-private-element:
-        image: us.gcr.io/${TARGET_PROJECT_ID}/${SERVICE_NAME}/${TARGET_ALIAS}:${TARGET_IMAGE_TAG}
-        build: .
-        container_name: micro_${NICKNAME}_${TARGET_ALIAS}
-        restart: unless-stopped
-        environment:
-            - TARGET_LOCAL_PORT
-            - TARGET_PROJECT_ID
-            - SERVICE_NAME
-            - TARGET_ALIAS
-            - TARGET_IMAGE_TAG
-            - NICKNAME
-        env_file:
-            - ".env.local.yml"
-        ports:
-            - 4421:8080
+  private-element:
+    image: ${IMAGE_URL}
+    build:
+      context: .
+    container_name: ${CONTAINER}
+    restart: unless-stopped
+    env_file:
+      - ".env.local.yml"
+    ports:
+      - ${TARGET_LOCAL_PORT}:${TARGET_REMOTE_PORT}
