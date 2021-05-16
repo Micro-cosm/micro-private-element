@@ -35,8 +35,8 @@ export class AuthGuard implements CanActivate {
 		if ( this.env.debug ) console.log( '>> AuthGuard -> canActivate -> router state:', state );
 
 		return this.authProcess.afa.user.pipe( map( user => {
-			console.log( '>> AuthGuard -> canActivate -> user:', user );
-			console.log( '>> AuthGuard -> canActivate -> config:', this.config );
+			if ( this.env.debug ) console.log( '>> AuthGuard -> canActivate -> user:', user );
+			if ( this.env.debug ) console.log( '>> AuthGuard -> canActivate -> config:', this.config );
 			if ( user ) {
 				if (
 					this.env.remote											&&
@@ -45,19 +45,19 @@ export class AuthGuard implements CanActivate {
 					! user.isAnonymous
 				) {
 					console.log( 'Oops...  You are logged in to a remote system with an account that has an unverified email address.' );
-					console.log( '>>> AuthGuard -> Redirecting to remote fallback URL:', this.env.authGuardRemoteFallbackURL );
+					if ( this.env.debug ) console.log( '>>> AuthGuard -> Redirecting to remote fallback URL:', this.env.authGuardRemoteFallbackURL );
 					window.location.href = this.env.authGuardRemoteFallbackURL;
 				}
 				return true
 			} else {
 				if ( this.env.local ) {
 					console.log('>>> AuthGuard -> canActivate?   NoSoFoYo');
-					console.log('>>> AuthGuard -> ACCESS DENIED -> Redirecting to remote fallback URL:', this.env.authGuardRemoteFallbackURL);
+					if ( this.env.debug ) console.log('>>> AuthGuard -> ACCESS DENIED -> Redirecting to:', this.env.authGuardRemoteFallbackURL);
 					this.router.navigate(["/login"]).then()
 				} else {
 					console.log('>>> AuthGuard -> canActivate?   NoSoFoYo');
-					console.log('>>> AuthGuard -> ACCESS DENIED -> Redirecting to remote fallback URL:', this.env.authGuardRemoteFallbackURL);
-					window.location.href = this.env.authGuardRemoteFallbackURL;
+					if ( this.env.debug ) console.log('>>> AuthGuard -> ACCESS DENIED -> Redirecting to:', this.env.authGuardRemoteFallbackURL);
+					window.location.href = this.env.authGuardRemoteFallbackURL + "?returnUrl=" + this.env.mife.this;
 				}
 			}
 		}))

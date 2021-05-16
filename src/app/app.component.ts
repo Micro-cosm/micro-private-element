@@ -13,8 +13,7 @@ import { Router				} from '@angular/router';
 })
 
 export class AppComponent {
-	env:	any;
-	title:	string;
+	env: any;
 	
 	constructor(
 		public	auth:			AngularFireAuth,
@@ -22,8 +21,7 @@ export class AppComponent {
 		private titleService:	Title
 	) {
 		this.env = environment;
-		console.log( 'Environment:', this.env );
-		this.title = this.env.title
-		this.titleService.setTitle( this.title )
+		console.log( 'Hosting environment:', this.env );
+		this.titleService.setTitle( this.env.title )
 	}
 }

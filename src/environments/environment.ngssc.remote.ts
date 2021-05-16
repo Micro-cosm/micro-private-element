@@ -1,49 +1,62 @@
 
 
+import 'angular-server-side-configuration/process';
+
 // V7
 import { fb		} from "./fb.stage";
-// import { local	} from "./local";
 import { remote	} from "./remote";
+// import { local	} from "./local";
 
-// When configuring new mifen,
-// 			   ---- change this... ----   ...and this...
-//  		 /							/
-//  		V						   V
-const PRIVATE_MIFE	= process.env.PRIVATE_MIFE	|| remote.REALM_BASE + remote.ROUTE_BASE + '#/';
-// 			   			  ------ ...and lastly, this.
-//						/
-//					   V
-const THIS_MIFE	= PRIVATE_MIFE;
+const realmBase		= process.env.REALM_BASE	|| 'https://too.fb.weja.us';
+const routeBase		= process.env.ROUTE_BASE	|| '/private-element/';
+const privateMife	= process.env.PRIVATE_MIFE	|| realmBase + routeBase + '#/';		// DEFINES THIS MIFE
+const thisMife		= privateMife;
+
+const alias			= process.env.ALIAS			|| "stage"
+const title			= process.env.TITLE			|| 'Default Private Website Title';
+const debug			= process.env.DEBUG			|| 'true';
+const logs			= process.env.LOGS			|| 'true';
+const authMife		= process.env.AUTH_MIFE		|| remote.default.AUTH_MIFE;
+const chatMife		= process.env.CHAT_MIFE		|| remote.default.CHAT_MIFE;
+const formMife		= process.env.FORM_MIFE		|| remote.default.FORM_MIFE;
+const publicMife	= process.env.PUBLIC_MIFE	|| remote.default.PUBLIC_MIFE;
+const authService	= process.env.AUTH_SERVICE	|| remote.default.AUTH_SERVICE;
+
+const assetsBucket	= 'https://storage.googleapis.com/weja.us';							// GLOBAL DEFAULTS
+const cmsService	= 'https://foo.fb.weja.us/cms';
+const cmsSheet		= 'https://docs.google.com/spreadsheets/d/14T-GM6Cx-OpT_s4MCytc1VL8fQax8eOC8IHdne-1Wf4/edit#gid=1055269632';
+const cmsAlias		= 'stage-EN_US';
+
 
 export const environment = {
-	production: Boolean(remote.ALIAS === 'prod'),
-	debug:		Boolean(remote.DEBUG === 'true'),
-	logs:		Boolean(remote.LOGS === 'true'),
+	production: Boolean(alias	=== 'prod'),
+	debug:		Boolean(debug	=== 'true'),
+	logs:		Boolean(logs	=== 'true'),
+	alias:		alias,
 	local:		false,
 	remote:		true,
-	title:		remote.TITLE,
-	target: { alias: remote.ALIAS },
-	assets: { bucket: remote.ASSETS_BUCKET },
+	title:		title,
+	assets: { bucket: assetsBucket },
 	mife: {
-		this:		THIS_MIFE,
-		auth:		remote.AUTH_MIFE,
-		register:	remote.AUTH_MIFE + 'register',
-		chat:		remote.CHAT_MIFE,
-		form:		remote.FORM_MIFE,
-		private:	THIS_MIFE,
-		public:		remote.PUBLIC_MIFE
+		this:		thisMife,
+		private:	thisMife,
+		auth:		authMife,
+		chat:		chatMife,
+		form:		formMife,
+		public:		publicMife,
+		register:	authMife + 'register'
 	},
 	service: {
-		auth:		remote.AUTH_SERVICE,
-		cms:		remote.CMS_SERVICE
+		auth:		authService,
+		cms:		cmsService
 	},
 	cms: {
-		service:	remote.CMS_SERVICE,
-		sheet:		remote.CMS_SHEET,
-		alias:		remote.CMS_ALIAS
+		service:	cmsService,
+		sheet:		cmsSheet,
+		alias:		cmsAlias
 	},
-	authGuardRemoteFallbackURL:	THIS_MIFE + '/login',
-	authGuardRemoteLoggedInURL:	THIS_MIFE + '/home',
+	authGuardRemoteFallbackURL:	authMife + 'login',
+	authGuardRemoteLoggedInURL:	authMife + 'home',
 	firebase: {
 		creds: {
 			appId:				fb.APP_ID,
@@ -56,8 +69,8 @@ export const environment = {
 			storageBucket:		fb.STORAGE_BUCKET,
 		},
 		configs: {
-			authGuardFallbackURL:		THIS_MIFE + '/login',
-			authGuardLoggedInURL:		THIS_MIFE + '/home',
+			authGuardFallbackURL:		authMife + 'login',
+			authGuardLoggedInURL:		authMife + 'home',
 			enableEmailVerification:	true,
 			enableFirestoreSync:		true,
 			nameMaxLength:				50,
@@ -73,4 +86,4 @@ export const environment = {
 	timeZone: 'America/Denver'
 };
 
-
+import 'zone.js/dist/zone-error';
